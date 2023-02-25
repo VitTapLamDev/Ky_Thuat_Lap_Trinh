@@ -72,7 +72,7 @@ async def get_user_detail(
 async def delete_post(
         post_id: int,
         db: _orm.Session = _fastapi.Depends(_services.get_database),
-        user: _schemas.UserRequest = _fastapi.Depends(_services.current_user)
+        # user: _schemas.UserRequest = _fastapi.Depends(_services.current_user)
 ):
     post = await _services.get_post_detail(post_id=post_id, db=db)
     await  _services.delete_post(post=post, db=db)
