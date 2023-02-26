@@ -78,7 +78,7 @@ async def delete_post(
     await  _services.delete_post(post=post, db=db)
     return "Xoa Post Thanh Cong!!"
 
-@app.put("/api/v1/posts/{{post_id}/", response_model=_schemas.PostResponse)
+@app.put("/api/v1/posts_update/{post_id}/", response_model=_schemas.PostResponse)
 async def update_post(
         post_id: int,
         post_request: _schemas.PostRequest,
@@ -86,3 +86,4 @@ async def update_post(
 ):
     db_post = await _services.get_post_detail(post_id=post_id, db=db)
     return await _services.update_post(post_request=post_request, post=db_post, db=db)
+

@@ -40,6 +40,7 @@ async def create_user(user: _schemas.UserRequest, db: _orm.Session):
     user_obj = _models.UserModel(
         email=email,
         name=user.name,
+        address=user.address,
         phone_number=user.phone_number,
         password_hash=hashed_password
     )
@@ -54,7 +55,6 @@ async def create_token(user: _models.UserModel):
     user_schemas = _schemas.UserResponse.from_orm(user)
     user_dict = user_schemas.dict()
     del user_dict["created_at"]
-
     token = _jwt.encode(user_dict, _JWT_SECRET)
     return dict(access_token=token, token_type="bearer")
 
@@ -67,7 +67,7 @@ async def login(email: str, password: str, db: _orm.Session):
         return False
     return db_user
 
-#Ham lay gia tri nguoi dung trong db
+#Ham lay thong tin nguoi dung trong db
 async def current_user(db: _orm.Session = _fastapi.Depends(get_database),
                        token: str= _fastapi.Depends(oauth2schema)):
     try:
