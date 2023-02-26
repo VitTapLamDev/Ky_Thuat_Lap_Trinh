@@ -41,6 +41,7 @@ async def create_user(user: _schemas.UserRequest, db: _orm.Session):
         email=email,
         name=user.name,
         phone_number=user.phone_number,
+        address=user.address,
         password_hash=hashed_password
     )
     db.add(user_obj)
