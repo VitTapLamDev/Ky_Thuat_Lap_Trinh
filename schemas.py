@@ -5,7 +5,6 @@ class UserBase(_pydantic.BaseModel):
     email: str
     name: str
     phone_number: str
-    address: str
 
 class UserRequest(UserBase):
     password: str

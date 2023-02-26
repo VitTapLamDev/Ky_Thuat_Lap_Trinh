@@ -1,6 +1,4 @@
 import datetime as _datetime
-
-import sqlalchemy
 import sqlalchemy as _sqlalchemy
 import sqlalchemy.orm as _orm
 import passlib.hash as _hash
@@ -12,7 +10,6 @@ class UserModel(_database.Base):
     email = _sqlalchemy.Column(_sqlalchemy.String, unique=True, index=True)
     name = _sqlalchemy.Column(_sqlalchemy.String)
     phone_number = _sqlalchemy.Column(_sqlalchemy.String)
-    address = _sqlalchemy.Column(_sqlalchemy.String)
     password_hash = _sqlalchemy.Column(_sqlalchemy.String)
     created_at = _sqlalchemy.Column(_sqlalchemy.DateTime, default=_datetime.datetime.utcnow())
     posts = _orm.relationship("PostModel", back_populates="user")
