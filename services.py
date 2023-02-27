@@ -15,7 +15,7 @@ oauth2schema = _security.OAuth2PasswordBearer("/api/v1/login")
 #Tao db
 def create_database():
     return _database.Base.metadata.create_all(bind=_database.engine)
-
+    #Kiem Tra DataBase Ton Tai
 if not os.path.exists("D:\Code\Python\BTL_KTLT\Ky_Thuat_Lap_Trinh\dbfile.db"):
     create_database()
     print("Created Database Successfully!!")
