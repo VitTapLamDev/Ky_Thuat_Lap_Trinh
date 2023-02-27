@@ -77,7 +77,6 @@ async def current_user(db: _orm.Session = _fastapi.Depends(get_database),
         db_user = db.query(_models.UserModel).get(payload["id"])
     except:
         raise _fastapi.HTTPException(status_code=401, detail="Thong tin xac thuc khong chinh xac")
-
     return _schemas.UserResponse.from_orm(db_user)
 
 #Ham tao post
