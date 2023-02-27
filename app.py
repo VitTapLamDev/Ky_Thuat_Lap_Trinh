@@ -49,7 +49,7 @@ async def get_posts_by_user(
 ):
     return await _services.get_post_by_user(user=user, db=db)
 
-@app.get("/api/v1/posts/alluser", response_model=List[_schemas.PostResponse])
+@app.get("/api/v1/posts/all-user", response_model=List[_schemas.PostResponse])
 async def get_posts_by_all_user(
         db: _orm.Session =_fastapi.Depends(_services.get_database)
 ):

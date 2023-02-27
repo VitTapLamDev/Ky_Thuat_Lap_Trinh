@@ -94,7 +94,7 @@ async def get_post_by_user(user: _schemas.UserResponse, db: _orm.Session):
     posts = db.query(_models.PostModel).filter_by(user_id= user.id)
     return list(map(_schemas.PostResponse.from_orm, posts))
 
-#Ham lay tat ca user
+#Ham lay tat ca post cua user
 async def get_post_by_all( db: _orm.Session):
     posts = db.query(_models.PostModel)
     return list(map(_schemas.PostResponse.from_orm, posts))
