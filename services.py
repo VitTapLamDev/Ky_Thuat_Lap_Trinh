@@ -1,3 +1,4 @@
+import os.path
 import database as _database
 import models as _models
 import sqlalchemy.orm as _orm
@@ -14,6 +15,10 @@ oauth2schema = _security.OAuth2PasswordBearer("/api/v1/login")
 #Tao db
 def create_database():
     return _database.Base.metadata.create_all(bind=_database.engine)
+
+if not os.path.exists("D:\Code\Python\BTL_KTLT\Ky_Thuat_Lap_Trinh\dbfile.db"):
+    create_database()
+    print("Created Database Successfully!!")
 
 #lay db
 def get_database():
