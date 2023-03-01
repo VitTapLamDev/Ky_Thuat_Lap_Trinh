@@ -66,11 +66,13 @@ async def create_token(user: _models.UserModel):
 
 # Ham Kiem Tra Dang Nhap
 async def login(email: str, password: str, db: _orm.Session):
+
     db_user = await getUserByEmail(email=email, db=db)
     if not db_user:
         return False
     if not db_user.password_verification(password=password):
         return False
+
     return db_user
 
 #Ham lay gia tri nguoi dung trong db

@@ -4,6 +4,7 @@ import sqlalchemy.orm as _orm
 import schemas as _schemas
 import services as _services
 from typing import List
+
 app = _fastapi.FastAPI()
 
 @app.post("/api/v1/users")
@@ -17,6 +18,7 @@ async def register_user(
         raise _fastapi.HTTPException(status_code=400, detail="Email da ton tai, vui long thu lai")
     # Tao user va lay token
     db_user = await  _services.create_user(user=user, db=db)
+
     return await _services.create_token(user=db_user)
 
 @app.post("/api/v1/login")
@@ -68,7 +70,7 @@ async def get_user_detail(
 ):
     return await _services.get_user_detail(user_id=user_id, db=db)
 
-@app.delete("/apt/v1/post/{post_id}/")
+@app.delete("/apt/v1/post-delete/{post_id}/")
 async def delete_post(
         post_id: int,
         db: _orm.Session = _fastapi.Depends(_services.get_database),
