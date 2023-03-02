@@ -110,7 +110,6 @@ async def get_post_detail(post_id: int, db: _orm.Session):
     db_post = db.query(_models.PostModel).filter(_models.PostModel.id==post_id).first()
     if db_post is None:
         raise _fastapi.HTTPException(status_code=404, detail="Post Khong Ton tai")
-    # return _schemas.PostResponse.from_orm(db_post)
     return db_post
 
 #Ham lay chi tiet cua data
@@ -118,11 +117,16 @@ async def get_user_detail(user_id: int, db: _orm.Session):
     db_user = db.query(_models.UserModel).filter(_models.UserModel.id==user_id).first()
     if db_user is None:
         raise _fastapi.HTTPException(status_code=404, detail="User khong ton tai")
-    return _schemas.UserResponse.from_orm(db_user)
+    return db_user
 
 #Ham Xoa post
 async def delete_post(post: _models.PostModel, db: _orm.Session):
     db.delete(post)
+    db.commit()
+
+#Ham xoa User
+async def delete_user(user: _models.UserModel, db: _orm.Session):
+    db.delete(user)
     db.commit()
 
 #Ham Cap Nhat post

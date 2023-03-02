@@ -74,13 +74,21 @@ async def get_user_detail(
 async def delete_post(
         post_id: int,
         db: _orm.Session = _fastapi.Depends(_services.get_database),
-        # user: _schemas.UserRequest = _fastapi.Depends(_services.current_user)
 ):
     post = await _services.get_post_detail(post_id=post_id, db=db)
     await  _services.delete_post(post=post, db=db)
     return "Xoa Post Thanh Cong!!"
 
-@app.put("/api/v1/posts/{post_id}/", response_model=_schemas.PostResponse)
+@app.delete("/api/v1/delete-user/{user_id}")
+async def delete_user(
+        user_id: int,
+        db: _orm.Session = _fastapi.Depends(_services.get_database)
+):
+    user = await  _services.get_user_detail(user_id=user_id, db=db)
+    await _services.delete_user(user=user, db=db)
+    return "Xoa user Thanh Cong"
+
+@app.put("/api/v1/update-posts/{post_id}/", response_model=_schemas.PostResponse)
 async def update_post(
         post_id: int,
         post_request: _schemas.PostRequest,
@@ -88,3 +96,5 @@ async def update_post(
 ):
     db_post = await _services.get_post_detail(post_id=post_id, db=db)
     return await _services.update_post(post_request=post_request, post=db_post, db=db)
+
+
