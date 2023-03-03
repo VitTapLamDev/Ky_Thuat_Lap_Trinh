@@ -70,7 +70,7 @@ async def get_user_detail(
 ):
     return await _services.get_user_detail(user_id=user_id, db=db)
 
-@app.delete("/apt/v1/post-delete/{post_id}/")
+@app.delete("/api/v1/post-delete/{post_id}/")
 async def delete_post(
         post_id: int,
         db: _orm.Session = _fastapi.Depends(_services.get_database),

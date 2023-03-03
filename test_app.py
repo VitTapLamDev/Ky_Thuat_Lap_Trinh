@@ -7,7 +7,7 @@ client = TestClient(app)
 
 class TestAPI(unittest.TestCase):
 
-    def test_get_data(self):
+    def test_connect(self):
         response = client.get('/api/v1/posts/all-user')
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.json(), list)
@@ -34,7 +34,7 @@ class TestAPI(unittest.TestCase):
                 f.write(token)
 
     def test_create_user(self):
-        user_data = {"email":"viet@gmail.com",
+        user_data = {"email":"viet123@gmail.com",
                      "name":"NguyenDucViet",
                      "phone_number":"0865946287",
                      "address":"LaoCai",
@@ -67,7 +67,12 @@ class TestAPI(unittest.TestCase):
 
     def test_delete_post(self):
         post_id = '3'
-        response = client.delete(f"/apt/v1/post-delete/{post_id}")
+        response = client.delete(f"/api/v1/post-delete/{post_id}")
+        self.assertEqual(response.status_code, 200)
+
+    def test_delete_user(self):
+        user_id = "2"
+        response = client.delete(f"/api/v1/delete-user/{user_id}")
         self.assertEqual(response.status_code, 200)
 
 if __name__ == "__main__":
