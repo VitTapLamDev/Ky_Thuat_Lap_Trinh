@@ -69,7 +69,7 @@ class TestAPI(unittest.TestCase):
             print('Update Post Successful')
 
     def test_delete_post(self):
-        post_id = '5'
+        post_id = '7'
         response = client.delete(f"/api/v1/post-delete/{post_id}")
         if self.assertEqual(response.status_code, 200):
             print('Delete post Successful')
