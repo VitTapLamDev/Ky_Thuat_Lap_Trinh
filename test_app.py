@@ -28,6 +28,7 @@ class TestAPI(unittest.TestCase):
         response = requests.post(url, data=data_encoded, headers=headers)
         self.assertEqual(response.status_code, 200)
         if response.status_code == 200:
+            print('Login Successful')
             response_json = json.loads(response.text)
             token = response_json["access_token"]
             with open("token.txt", "w") as f:
@@ -41,7 +42,8 @@ class TestAPI(unittest.TestCase):
                      "password":"Vietlcvn"
         }
         response = client.post(f"/api/v1/users", json=user_data)
-        self.assertEqual(response.status_code, 200)
+        if self.assertEqual(response.status_code, 200):
+            print('Created User Successful')
 
     def test_create_post(self):
         url = "http://127.0.0.1:8000/api/v1/posts"
@@ -55,25 +57,28 @@ class TestAPI(unittest.TestCase):
                 "post_description": "string",
                 "image": "string"
         }
-        print(token)
         response = client.post(url, json=payload, headers=headers)
-        self.assertEqual(response.status_code, 200)
+        if self.assertEqual(response.status_code, 200):
+            print('Created Post Successful')
 
     def test_put_post(self):
         post_id = '2'
         data = {"post_title": "Bai Test Post", "post_description": "Test linh tinh", "image": "test"}
         response = client.put(f'/api/v1/update-posts/{post_id}/', json=data)
-        self.assertEqual(response.status_code, 200)
+        if self.assertEqual(response.status_code, 200):
+            print('Update Post Successful')
 
     def test_delete_post(self):
-        post_id = '3'
+        post_id = '5'
         response = client.delete(f"/api/v1/post-delete/{post_id}")
-        self.assertEqual(response.status_code, 200)
+        if self.assertEqual(response.status_code, 200):
+            print('Delete post Successful')
 
     def test_delete_user(self):
         user_id = "2"
         response = client.delete(f"/api/v1/delete-user/{user_id}")
-        self.assertEqual(response.status_code, 200)
+        if self.assertEqual(response.status_code, 200):
+            print('Delete User Succsessful')
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

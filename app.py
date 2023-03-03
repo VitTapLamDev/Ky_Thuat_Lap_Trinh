@@ -96,5 +96,3 @@ async def update_post(
 ):
     db_post = await _services.get_post_detail(post_id=post_id, db=db)
     return await _services.update_post(post_request=post_request, post=db_post, db=db)
-
-
